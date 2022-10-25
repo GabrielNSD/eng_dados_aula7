@@ -1,27 +1,23 @@
 #!/usr/bin/env python
 import sys
 
-curr_word = None
-curr_count = 0
+salaries = []
 # Process each key-value pair from the mapper
 for line in sys.stdin:
-    # Get the key and value from the current line
-    word, count = line.split('\t')
+    # values are separated by \t
     name, salary = line.split('\t')
-    # Convert the count to an int
-    count = int(count)
-    # If the current word is the same as the previous word,
-    # increment its count, otherwise print the words count
-    # to stdout
-    if word == curr_word:
-        curr_count += count
-    else:
-        # Write word and its number of occurrences as a key-value
-        # pair to stdout
-        if curr_word:
-            print('{0}\t{1}'.format(curr_word, curr_count))
-        curr_word = word
-        curr_count = count
-# Output the count for the last word
-if curr_word == word:
-    print('{0}\t{1}'.format(curr_word, curr_count))
+
+    # converts salary to float
+    salary = float(salary)
+
+    # the pair salary&name is stored as a tuple, with salary as first item since it has priority on sorted() comparision
+    entry_tuple = (salary, name)
+    # each pair is appended to the list
+    salaries.append(entry_tuple)
+
+# sort the list in descending order
+sorted_salaries = sorted(salaries, reverse=True)
+
+# print 10 first salaries
+for pair in sorted_salaries[:10]:
+    print('{0}\t{1}'.format(pair[1], pair[0]))
