@@ -6,9 +6,7 @@ for line in sys.stdin.readlines():
     # Get the words in each line
     words = line.strip().split(' ')
 
-    # print("words:", words)
-    # Second column  is the .htlm
-    # was removed '/' and ' " " '
+    # Print the username fo each login attempt
     for item in words:
         if item.startswith('user='):
             print(item.replace('user=<', '').replace('>,', ''))

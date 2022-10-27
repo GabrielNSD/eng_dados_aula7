@@ -3,7 +3,7 @@ import sys
 
 # Read each line from stdin
 for line in sys.stdin.readlines():
-    # Get the words in each line
+    # Get the words in each line, separated by \t
     words = line.strip().split("\t")
 
     # Second column  is the .htlm
