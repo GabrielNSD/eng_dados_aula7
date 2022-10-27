@@ -9,4 +9,3 @@ for line in sys.stdin.readlines():
     # Second column  is the .htlm
     # was removed '/' and ' " " '
     print('{0}'.format(words[1].replace('/', "").replace('"', "")))
-    
