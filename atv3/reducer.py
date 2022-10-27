@@ -1,30 +1,29 @@
 #!/usr/bin/env python
 import sys
 
-users = []
+# users dict, The keys are be user names, values are the occurences
+# {'user1': 3, 'user2': 2}
+users = {}
 
-# Process each key-value pair from the mapper
+# Process each line from the mapper
 for line in sys.stdin:
-	# values are separated by \n
-	log , x = line.split('\n')
-	
+    # values are separated by \n
+    name = line.split('\n')[0]
 
-	if(log in x[1] for x in users):
-		x=5 #só pra testar 
-		#index2 = users.index(log)
-		#users[user][1] = 
-		#users[index2][1] = users[index2][1] + 1
+    # Search the name on the users dict
+    if (name in users.keys()):
+        # If the name is in the dict, add 1 ocurrence to it
+        users[name] += 1
+    else:
+        # If the name is not in the dict, add it with 1 occurence
+        users[name] = 1
 
-	else:
-		entry_tuple = (log, 0)
-		users.append(entry_tuple)
+# Transforms the dict in a list of tuples
+users_list = users.items()
 
-sorted_log = sorted(users, reverse=True)
-
+# Sort the list of users by their occurrences in reverse order
+sorted_log = sorted(users_list, key=lambda tup: tup[1], reverse=True)
 
 for user in sorted_log:
-	if user[1] > 100:
-		print('{0}\t{1}'.format(users[0], users[1]))
-	else:
-		break
-
+    if user[1] > 100:
+        print('{0}\t{1}'.format(user[0], user[1]))
